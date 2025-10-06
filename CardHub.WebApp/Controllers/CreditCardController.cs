@@ -12,7 +12,7 @@ namespace CardHub.WebApp.Controllers
             _cardService = cardService;
         }
 
-        //GEt: CreditCard
+        //GET: CreditCard
         [HttpGet]
         public async Task<IActionResult> Index()
         {

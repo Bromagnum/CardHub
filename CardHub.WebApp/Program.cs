@@ -2,8 +2,10 @@ using ApplicationLayer.Interfaces;
 using ApplicationLayer.MappingProfiles;
 using InfrastructureLayer.Infrastructurelayer.Data;
 using InfrastructureLayer.Infrastructurelayer.Services;
-using Microsoft.Extensions.DependencyInjection;
+
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using Microsoft.Extensions.Logging;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +13,23 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//AutoMapper Configuration
+
+var loggerFactory = LoggerFactory.Create(logging => logging.AddConsole());
+var mapperConfig = new MapperConfiguration(cfg =>
+{
+
+    cfg.AddProfile<CreditCardProfile>();
+
+}, loggerFactory);
+//Mapper Instance
+IMapper mapper = mapperConfig.CreateMapper();
+
+//DI container
+
+builder.Services.AddSingleton(mapper);
 //Service Registrations
-builder.Services.AddAutoMapper(typeof(CreditCardProfile));
+
 builder.Services.AddScoped<ICreditCardService, CreditCardService>();
 //DbContext Configuration
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

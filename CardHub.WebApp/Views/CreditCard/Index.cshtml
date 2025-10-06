@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CreditCardViewModel>
+@{
+    ViewData["Title"] = "Credit Cards";
+
+}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h3 class="card-title">Credit Cards</h3>
+        <a asp-action="Create" class="btn btn-outline-primary">
+            <i class="fa fa-plus"></i> Add New Credit Card
+        </a>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Limit</th>
+                    <th>Billing Cycle</th>
+                    <th>Benefits</th>
+                    <th style="width:140px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var card in Model)
+                {<tr>
+                        <td>@card.CardName</td>
+                        <td>@card.Limit</td>
+                        <td>@card.BillingCycle</td>
+                        <td>@card.Benefits</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@card.Id" class="btn btn-warning">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@card.Id" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                </tr>
+                    
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
