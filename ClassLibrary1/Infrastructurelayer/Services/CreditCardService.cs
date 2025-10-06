@@ -60,20 +60,19 @@ namespace InfrastructureLayer.Infrastructurelayer.Services
             return _mapper.Map<CreditCardViewModel>(await entity);
         }
 
-        public async Task<bool> UpdateAsync(int id, CreditCardViewModel model)
+        public async Task<bool> UpdateAsync(CreditCardViewModel model)
         {
-            var entity = _context.CreditCards
-                .FirstOrDefault(x => x.Id == id);
-                if (entity == null) return false ;
-            else
-            {
+            var entity = _context.CreditCards.FindAsync(model.Id);
+
+            if (entity == null) return false ;
+            
                 _mapper.Map(model, entity);
-                entity.UpdatedDate = DateTime.UtcNow;
+                
 
                 await _context.SaveChangesAsync();
                 return true;
 
-            }
+            
              
         }
     }
