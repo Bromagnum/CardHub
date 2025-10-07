@@ -30,9 +30,18 @@ namespace CardHub.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreditCardViewModel cardModel)
         {
-            if (!ModelState.IsValid) return View(cardModel);
+            var entity = new CreditCardViewModel
+            {
+                CardName = cardModel.CardName,
+                BankName = cardModel.BankName,
+                CardType = cardModel.CardType,
+                Limit = cardModel.Limit,
+                CurrentBalance = cardModel.CurrentBalance,
+                BillingCycle = cardModel.BillingCycle,
+                Benefits = cardModel.Benefits
+            };
 
-            await _cardService.AddAsync(cardModel);
+            await _cardService.AddAsync(entity);
             return RedirectToAction(nameof(Index));
         }
         //Get: CreditCard/Edit
@@ -87,5 +96,6 @@ namespace CardHub.WebApp.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+
     }
 }

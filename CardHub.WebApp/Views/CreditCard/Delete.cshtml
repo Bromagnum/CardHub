@@ -1,0 +1,45 @@
+﻿@model CreditCardViewModel
+@{
+    ViewData["Title"] = "Delete Credit Card";
+}
+
+
+<div class="card card-danger">
+  <div class="card-header">
+    <h3 class="card-title">Kartı Sil</h3>
+  </div>
+
+  <div class="card-body">
+    <p><strong>@Model.CardName</strong> adlı kartı silmek istediğinizden emin misiniz?</p>
+
+    <dl class="row">
+      <dt class="col-sm-4">Banka</dt>
+      <dd class="col-sm-8">@Model.BankName</dd>
+
+      <dt class="col-sm-4">Kart Türü</dt>
+      <dd class="col-sm-8">@Model.CardType</dd>
+
+      <dt class="col-sm-4">Limit</dt>
+      <dd class="col-sm-8">@Model.Limit</dd>
+
+      <dt class="col-sm-4">Mevcut Bakiye</dt>
+      <dd class="col-sm-8">@Model.CurrentBalance</dd>
+
+      <dt class="col-sm-4">Fatura Dönemi</dt>
+      <dd class="col-sm-8">@Model.BillingCycle</dd>
+
+      <dt class="col-sm-4">Faydalar</dt>
+      <dd class="col-sm-8">@string.Join(", ", Model.Benefits)</dd>
+    </dl>
+  </div>
+
+  <div class="card-footer text-end">
+    <form asp-action="DeleteConfirmed" method="post">
+      <input type="hidden" asp-for="Id" />
+      <button type="submit" class="btn btn-danger">
+        <i class="fas fa-trash"></i> Sil
+      </button>
+      <a asp-action="Index" class="btn btn-secondary">Vazgeç</a>
+    </form>
+  </div>
+</div>

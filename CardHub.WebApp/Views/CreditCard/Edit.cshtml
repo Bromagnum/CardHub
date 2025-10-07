@@ -1,0 +1,73 @@
+﻿@model CreditCardViewModel
+@{
+    ViewData["Title"] = "Edit Credit Card"; 
+
+}
+
+<div class="card card-warning">
+  <div class="card-header">
+    <h3 class="card-title">Kart Güncelle</h3>
+  </div>
+
+  <form asp-action="Edit" method="post" class="needs-validation" novalidate>
+    <input type="hidden" asp-for="Id" />
+
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label asp-for="CardName" class="form-label"></label>
+          <input asp-for="CardName" class="form-control" />
+          <span asp-validation-for="CardName" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+          <label asp-for="CardType" class="form-label"></label>
+          <input asp-for="CardType" class="form-control" />
+          <span asp-validation-for="CardType" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+          <label asp-for="BankName" class="form-label"></label>
+          <input asp-for="BankName" class="form-control" />
+          <span asp-validation-for="BankName" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+          <label asp-for="Limit" class="form-label"></label>
+          <input asp-for="Limit" class="form-control" type="number" />
+          <span asp-validation-for="Limit" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+          <label asp-for="CurrentBalance" class="form-label"></label>
+          <input asp-for="CurrentBalance" class="form-control" type="number" />
+          <span asp-validation-for="CurrentBalance" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+          <label asp-for="BillingCycle" class="form-label"></label>
+          <select asp-for="BillingCycle" class="form-select">
+            <option value="">Seçiniz...</option>
+            <option>Monthly</option>
+            <option>Quarterly</option>
+            <option>Yearly</option>
+          </select>
+          <span asp-validation-for="BillingCycle" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12">
+          <label asp-for="Benefits" class="form-label"></label>
+          <input asp-for="Benefits" class="form-control" placeholder="Virgülle ayır: Cashback, Lounge, vs." />
+          <span asp-validation-for="Benefits" class="text-danger"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer text-end">
+      <button type="submit" class="btn btn-warning">
+        <i class="fas fa-edit"></i> Güncelle
+      </button>
+      <a asp-action="Index" class="btn btn-secondary">Geri</a>
+    </div>
+  </form>
+</div>

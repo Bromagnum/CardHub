@@ -13,7 +13,7 @@ namespace ApplicationLayer.Interfaces
         Task<CreditCardViewModel> GetByIdAsync(int id);
         Task AddAsync(CreditCardViewModel model);
         Task<bool> UpdateAsync(CreditCardViewModel model);
-        Task DeleteAsync(int id);
+        Task<bool> DeleteAsync(int id);
 
 
     }

@@ -3,8 +3,80 @@
     ViewData["Title"] = "Credit Cards";
 
 }
+<div class="container-fluid">
+    <div class="card ">
+        <div class="d-flex justify-content-between ">
+            <h3 class="card-title mt-3 ms-lg-3" >CardHUB</h3>
+               
+            <a asp-action="Create" asp-controller="CreditCard" class="btn btn-sm btn-info mt-2 m-md-3 ">Kart Ekle</a>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table class="table table-bordered" role="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">CardName</th>
+                        <th scope="col">BankName</th>
+                        <th scope="col">Limit</th>
+                        <th scope="col">BillingCycle</th>
+                        <th scope="col">Benefits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var card in Model)
+                    {
+                        <tr class="align-middle">
+                            <td>@card.Id</td>
+                            <td>@card.CardName</td>
+                            <td>@card.BankName</td>
+                            <td><span class="badge text-bg-primary">@card.Limit</span></td>
+                            <td>@card.BillingCycle</td>
+                            <td>
+                                <ul class="list-unstyled mb-0">
+                                    @foreach (var benefit in card.Benefits)
+                                    {
+                                        <li>@benefit</li>
 
-<div class="card">
+                                    }
+                                </ul>
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-controller="CreditCard" asp-route-id="@card.Id" class="btn btn-sm btn-primary">Güncelle</a>
+                                <a asp-action="Delete" asp-controller="CreditCard" asp-route-id="@card.Id" class="btn btn-sm btn-danger">Sil</a>
+
+                            </td>
+                            
+                        </tr>
+                    }
+                    
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer clearfix">
+            <ul class="pagination pagination-sm m-0 float-end">
+                <li class="page-item">
+                    <a class="page-link" href="#">«</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">»</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+   
+</div>
+@* <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h3 class="card-title">Credit Cards</h3>
         <a asp-action="Create" class="btn btn-outline-primary">
@@ -46,4 +118,4 @@
         </table>
     </div>
 
-</div>
+</div> *@

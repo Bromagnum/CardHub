@@ -27,7 +27,7 @@ namespace InfrastructureLayer.Infrastructurelayer.Services
         public async Task AddAsync(CreditCardViewModel model)
         {
             var entity = _mapper.Map<CreditCard>(model);
-            entity.Id = Guid.NewGuid().GetHashCode();
+            
             entity.CreatedDate = DateTime.UtcNow;
 
            await _context.CreditCards.AddAsync(entity);
@@ -35,9 +35,18 @@ namespace InfrastructureLayer.Infrastructurelayer.Services
 
         }
 
-        public Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+          var card = await _context.CreditCards.FindAsync(id);
+            if (card == null)
+            {
+                return false;
+
+            }
+            _context.CreditCards.Remove(card);
+            await _context.SaveChangesAsync();
+            return true;
+
         }
 
         public async Task<List<CreditCardViewModel>> GetAllAsync()
