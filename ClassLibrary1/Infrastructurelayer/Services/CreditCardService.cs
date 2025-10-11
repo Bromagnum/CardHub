@@ -1,7 +1,5 @@
 ﻿using ApplicationLayer.Interfaces;
 using ApplicationLayer.ViewModels;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using DomainLayer.Domain.Entites;
 using InfrastructureLayer.Infrastructurelayer.Data;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using MapsterMapper;
+using DomainLayer.Domain.Entites;              // CreditCard için
+using ApplicationLayer.Interfaces;
 
 namespace InfrastructureLayer.Infrastructurelayer.Services
 {

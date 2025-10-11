@@ -18,14 +18,10 @@ namespace DomainLayer.Domain.Entites
        
         public DateTime? BillingCycleStart { get; set; }
         public DateTime? BillingCycleEnd { get; set; }
-        public string? BenefitsJson { get; set; }
+        public List<string>? Benefits { get; set; }
 
-        public List<string>? GetBenefits()
-        {
-            if (string.IsNullOrEmpty(BenefitsJson))
-                return new List<string>();
-            return System.Text.Json.JsonSerializer.Deserialize<List<string>>(BenefitsJson) ?? new List<string>();
-        }
+
+        
 
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }

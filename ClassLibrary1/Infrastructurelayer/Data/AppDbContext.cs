@@ -48,8 +48,10 @@ namespace InfrastructureLayer.Infrastructurelayer.Data
                 entity.Property(c => c.BillingCycleEnd)
                       .HasColumnType("date");
 
-                entity.Property(c => c.BenefitsJson)
-                      .HasColumnType("nvarchar(max)");
+                entity.Property(c => c.Benefits)
+                      .HasConversion(v => string.Join(',', v),
+                      v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()
+                      );
 
                 entity.Property(c => c.CreatedDate)
                       .HasDefaultValueSql("GETUTCDATE()");
