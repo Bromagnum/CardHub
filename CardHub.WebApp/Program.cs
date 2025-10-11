@@ -4,9 +4,6 @@ using InfrastructureLayer.Infrastructurelayer.Data;
 using InfrastructureLayer.Infrastructurelayer.Services;
 
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using Microsoft.Extensions.Logging;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,27 +15,12 @@ builder.Services.AddControllersWithViews();
 var loggerFactory = LoggerFactory.Create(logging => logging.AddConsole());
 var mapperConfig = new MapperConfiguration(cfg =>
 {
-
     cfg.AddProfile<CreditCardProfile>();
 
-}, loggerFactory);
-//Mapper Instance
 IMapper mapper = mapperConfig.CreateMapper();
-
-//DI container
-
 builder.Services.AddSingleton(mapper);
-//Service Registrations
 
 builder.Services.AddScoped<ICreditCardService, CreditCardService>();
-//DbContext Configuration
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString));
-
-
-
 
 var app = builder.Build();
 
@@ -46,7 +28,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
